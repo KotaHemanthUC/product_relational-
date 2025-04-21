@@ -41,9 +41,9 @@ public class ProductController {
     // }
 
     @GetMapping("/maxproductprice")
-    public ResponseEntity<List<ProductDto>> getMaxProdPrice() {
+    public ResponseEntity<List<Long>> getMaxProdPrice() {
         System.out.println("=== Max Product Price ===");
-        List<ProductDto> uniqProd = prodService.getMaxPrice();
+        List<Long> uniqProd = prodService.getMaxPrice();
         System.out.println("++++"+ uniqProd.size());
         return ResponseEntity.ok(uniqProd);
     }

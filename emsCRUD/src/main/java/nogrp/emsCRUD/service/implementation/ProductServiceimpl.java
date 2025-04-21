@@ -39,11 +39,11 @@ public class ProductServiceimpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getMaxPrice(){
+    public List<Long> getMaxPrice(){
         System.out.println("---- getMaxPrice ---");
 
         var yearPrice = prodRepository.findMaxPrice();
-        // System.out.println("===> year: "+yearProds.size());
+        System.out.println("===> year: "+yearPrice.size());
         // List<ProductDto> retyearProds = yearProds.stream().map(prod -> ProductMapper.mapToProdDto(prod))
                             // .collect(Collectors.toList());
         // System.out.println("=== year sz ==="+retyearProds.size());

@@ -8,7 +8,7 @@ public interface ProductService {
     ProductDto createEmployee(ProductDto employeeDto);
     ProductDto getEmployeeId(Long employeeId);
     List<ProductDto> getAllEmployees();
-    List<ProductDto> getMaxPrice();
+    List<Long> getMaxPrice();
     List<Long> getYearMaxPrice();
     // List<ProductDto> getUniqueProdPrice();
     // List<ProductDto> 
