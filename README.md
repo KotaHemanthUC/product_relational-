@@ -23,3 +23,13 @@ Long year
 Long price
 
 ```
+3. products table is created in ecommerce database.
+
+4.
+```shell
+psql -d ecommerce
+```
+
+```shell
+SELECT tablename FROM pg_tables WHERE schemaname = 'public';
+```
