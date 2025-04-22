@@ -37,3 +37,12 @@ SELECT tablename FROM pg_tables WHERE schemaname = 'public';
 ```sql
 INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (103, 'B', 2, 2023, 150);
 ```
+
+
+Rest EndPoints:
+
+<ol>
+  <li>http://localhost:8080/api/products : returns all records of product value</li>
+  <li>http://localhost:8080/api/products/maxproductprice : gives latest version of maximum priced product</li>
+  <li>http://localhost:8080/api/products/yearmax : gives each years maximum price ID</li>
+</ol>
