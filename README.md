@@ -33,3 +33,7 @@ psql -d ecommerce
 ```shell
 SELECT tablename FROM pg_tables WHERE schemaname = 'public';
 ```
+5. Insert into table. 
+```sql
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (103, 'B', 2, 2023, 150);
+```
