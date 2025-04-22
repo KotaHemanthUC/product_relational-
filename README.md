@@ -52,3 +52,13 @@ Rest EndPoints:
 Misc:
 
 This along with basic Curd Postgres operations are supported with ID based search.
+
+pgadmin4-9.1-x86_64 : postgre16 is compatible with pgadmin 4.9 version. 
+
+Select Database >>> Schemas >>> Query Tool
+
+Then execute below command to get all tables in a database.
+
+```shell
+SELECT tablename FROM pg_tables WHERE schemaname = 'public';
+```
