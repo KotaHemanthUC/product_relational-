@@ -1,4 +1,4 @@
-- CommandLine Way of running the code
+### CommandLine Way of running the code
 - mvn clean
 - mvn clean install
 - mvn spring-boot:run
