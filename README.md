@@ -117,3 +117,9 @@ Java HotSpot(TM) 64-Bit Server VM (build 21.0.7+8-LTS-245, mixed mode, sharing)
 
 ### References
 - https://sqlfiddle.com/postgresql/online-compiler?id=83ae1851-401a-48cc-a4a3-dddcff2f844a
+- https://github.com/pfilaretov42/spring-data-jdbc-jsonb/blob/galaxy/src/main/kotlin/dev/pfilaretov42/spring/data/jdbc/jsonb/entity/FriendsEntity.kt
+- https://vladmihalcea.com/spring-jpa-dto-projection/
+- https://thorben-janssen.com/spring-data-jpa-named-queries/
+- https://junhyunny.github.io/spring-boot/jpa/junit/spring-data-jpa-group-by/
+- https://github.com/Junhyunny/blog-in-action/blob/master/2021-06-22-spring-data-jpa-group-by/action-in-blog/src/main/java/blog/in/action/repository/ItemRepository.java
+- https://dev.to/shikha_verma_1896/common-exceptions-in-spring-core-and-springmvc-3l69
