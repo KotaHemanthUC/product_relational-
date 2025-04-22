@@ -38,6 +38,37 @@ SELECT tablename FROM pg_tables WHERE schemaname = 'public';
 INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (103, 'B', 2, 2023, 150);
 ```
 
+6. SQL Setup
+
+```sql
+CREATE TABLE IF NOT EXISTS Products (
+  ID SERIAL PRIMARY KEY,
+  Product VARCHAR(100),
+  Version integer,
+  PYear integer,
+  Price integer
+);
+```    
+
+```sql
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (101, 'A', 2, 2024, 200);
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (102, 'A', 1, 2024, 100);
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (106, 'A', 1, 2025, 200);
+
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (103, 'B', 2, 2023, 150);
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (104, 'B', 1, 2020, 50);
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (105, 'B', 3, 2023, 250);
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (111, 'B', 3, 2023, 550);
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (112, 'B', 4, 2023, 1050);
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (113, 'B', 4, 2023, 121);
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (114, 'B', 1, 2023, 50);
+INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (115, 'B', 1, 2022, 50);
+```
+
+```sql
+SELECT * FROM Products;
+-- trivial query
+```
 
 Rest EndPoints:
 
@@ -73,3 +104,16 @@ Java version: 21.0.7, vendor: Oracle Corporation, runtime: /Library/Java/JavaVir
 Default locale: en_US, platform encoding: UTF-8
 OS name: "mac os x", version: "12.3.1", arch: "x86_64", family: "mac"
 ```
+
+```shell
+java --version
+```
+
+```plaintext
+java 21.0.7 2025-04-15 LTS
+Java(TM) SE Runtime Environment (build 21.0.7+8-LTS-245)
+Java HotSpot(TM) 64-Bit Server VM (build 21.0.7+8-LTS-245, mixed mode, sharing)
+```
+
+### References
+- https://sqlfiddle.com/postgresql/online-compiler?id=83ae1851-401a-48cc-a4a3-dddcff2f844a
