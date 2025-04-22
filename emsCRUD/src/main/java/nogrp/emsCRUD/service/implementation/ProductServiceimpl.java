@@ -18,21 +18,21 @@ import nogrp.emsCRUD.service.ProductService;
 public class ProductServiceimpl implements ProductService {
     private ProductRepository prodRepository;
     @Override
-    public ProductDto createEmployee(ProductDto employeeDto) {
-        Product product = ProductMapper.mapToProduct(employeeDto);
+    public ProductDto createProduct(ProductDto prodDto) {
+        Product product = ProductMapper.mapToProduct(prodDto);
         Product savedProd = prodRepository.save(product);
         return (ProductMapper.mapToProdDto(savedProd));
     }
 
     @Override
-    public ProductDto getEmployeeId(Long employeeId) {
-        Product employee = prodRepository.findById(employeeId)
-                .orElseThrow(()-> new ResourceNotFoundException("Employee dosen't exist with given ID"+employeeId));
-        return (ProductMapper.mapToProdDto(employee));
+    public ProductDto getProductId(Long productId) {
+        Product product = prodRepository.findById(productId)
+                .orElseThrow(()-> new ResourceNotFoundException("Product dosen't exist with given ID"+productId));
+        return (ProductMapper.mapToProdDto(product));
     }
 
     @Override
-    public List<ProductDto> getAllEmployees() {
+    public List<ProductDto> getAllProducts() {
         List<Product> prods = prodRepository.findAll();
         return prods.stream().map(prod -> ProductMapper.mapToProdDto(prod))
                 .collect(Collectors.toList());
@@ -97,18 +97,27 @@ public class ProductServiceimpl implements ProductService {
     }
 
     @Override
-    public ProductDto updateEmployee(Long employeeId, ProductDto updatedEmployee) {
-        Product employee = prodRepository.findById(employeeId).orElseThrow(
-                () -> new ResourceNotFoundException("Product doesnt exist with given ID:"+employeeId)
+    public List<ProductDto> getUniqueProdPrice(){
+        var upriceProds = prodRepository.findProductPrice();
+        System.out.println("===> ProdPrice: "+upriceProds.size());
+        return upriceProds.stream().map(prod -> ProductMapper.mapToProdDto(prod))
+                .collect(Collectors.toList());
+        // return upriceProds;
+    }
+
+    @Override
+    public ProductDto updateProduct(Long productId, ProductDto updatedProduct) {
+        Product prod = prodRepository.findById(productId).orElseThrow(
+                () -> new ResourceNotFoundException("Product doesnt exist with given ID:"+productId)
         );
-        employee.setProduct(updatedEmployee.getProduct());
-        employee.setPrice(updatedEmployee.getPrice());
-        employee.setYear(updatedEmployee.getYear());
-        employee.setVersion(updatedEmployee.getVersion());
+        prod.setProduct(updatedProduct.getProduct());
+        prod.setPrice(updatedProduct.getPrice());
+        prod.setYear(updatedProduct.getYear());
+        prod.setVersion(updatedProduct.getVersion());
 
-        Product updatedEmployeeObj = prodRepository.save(employee);
+        Product updatedProdObj = prodRepository.save(prod);
 
-        return ProductMapper.mapToProdDto(updatedEmployeeObj);
+        return ProductMapper.mapToProdDto(updatedProdObj);
     }
 
 }

@@ -3,14 +3,15 @@ package nogrp.emsCRUD.service;
 import java.util.List;
 
 import nogrp.emsCRUD.dto.ProductDto;
+import nogrp.emsCRUD.entity.Product;
 
 public interface ProductService {
-    ProductDto createEmployee(ProductDto employeeDto);
-    ProductDto getEmployeeId(Long employeeId);
-    List<ProductDto> getAllEmployees();
+    ProductDto createProduct(ProductDto prodDto);
+    ProductDto getProductId(Long prodId);
+    List<ProductDto> getAllProducts();
     List<Long> getMaxPrice();
     List<Long> getYearMaxPrice();
-    // List<ProductDto> getUniqueProdPrice();
+    List<ProductDto> getUniqueProdPrice();
     // List<ProductDto> 
-    ProductDto updateEmployee(Long employeeId, ProductDto updatedEmployee);
+    ProductDto updateProduct(Long productId, ProductDto updatedProduct);
 }

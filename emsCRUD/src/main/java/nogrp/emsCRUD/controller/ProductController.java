@@ -22,23 +22,16 @@ import nogrp.emsCRUD.service.ProductService;
 public class ProductController {
     private ProductService prodService;
     @PostMapping
-    public ResponseEntity<ProductDto> createEmployee(@RequestBody ProductDto employeeDto){
-        ProductDto savedEmployee = prodService.createEmployee(employeeDto);
-        return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
+    public ResponseEntity<ProductDto> createProd(@RequestBody ProductDto productDto){
+        ProductDto savedProduct = prodService.createProduct(productDto);
+        return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ProductDto> getEmployeeById(@PathVariable("id") Long employeeId){
-        ProductDto prodDto = prodService.getEmployeeId(employeeId);
+    public ResponseEntity<ProductDto> getProductById(@PathVariable("id") Long prodId){
+        ProductDto prodDto = prodService.getProductId(prodId);
         return ResponseEntity.ok(prodDto);
     }
-
-    // @GetMapping("/max")
-    // public ResponseEntity<ProductDto> getMaxEmployee() {
-    //     System.out.println("=== Max is hit ===");
-    //     ProductDto maxProd = prodService.getMaxPrice();
-    //     return ResponseEntity.ok(maxProd);
-    // }
 
     @GetMapping("/maxproductprice")
     public ResponseEntity<List<Long>> getMaxProdPrice() {
@@ -60,17 +53,29 @@ public class ProductController {
         return ResponseEntity.ok(uniqProds);
     }
 
+    @GetMapping("/UniqueProdPrice")
+    public ResponseEntity<List<ProductDto>> getProdPriceLatestYear() {
+        // public ResponseEntity<var> getYearMax() {
+            System.out.println("=== Unique Product Price ===");
+            var uniqProdPrice = prodService.getUniqueProdPrice();
+            // System.out.println();
+            // System.out.println("========: "+uniqProds.getClass().getSimpleName());
+            // List<ProductDto> uniqProds = prodService.getYearMaxPrice();
+            //  = prodService.getUniqueProdPrice();
+            return ResponseEntity.ok(uniqProdPrice);
+    }
+    
     @GetMapping
-    public ResponseEntity<List<ProductDto>> getAllEmployees(){
+    public ResponseEntity<List<ProductDto>> getAllProducts(){
         System.out.println("=== Print All ===");
-        List<ProductDto> employees = prodService.getAllEmployees();
-        return ResponseEntity.ok(employees);
+        List<ProductDto> products = prodService.getAllProducts();
+        return ResponseEntity.ok(products);
     }
     @PutMapping("{id}")
-    public ResponseEntity<ProductDto> updateEmployee(@PathVariable("id") Long employeeId,
-                                                      @RequestBody ProductDto updatedEmployee){
-       ProductDto employeeDto = prodService.updateEmployee(employeeId, updatedEmployee);
-       return ResponseEntity.ok(employeeDto);
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable("id") Long prodId,
+                                                      @RequestBody ProductDto updatedProd){
+       ProductDto prodDto = prodService.updateProduct(prodId, updatedProd);
+       return ResponseEntity.ok(prodDto);
     }
 
 }

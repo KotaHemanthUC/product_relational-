@@ -26,6 +26,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // FROM Products AS p
     // WHERE p.Price = (SELECT MAX(Price) FROM Products)""
 
+    @Query(value="SELECT * FROM products as p WHERE PYear = ( SELECT MAX(PYear) FROM products WHERE Product = p.Product AND Price = p.Price) ORDER BY Product, Price", nativeQuery = true)
+    List<Product> findProductPrice();
+
     @Query(value = "SELECT MAX(p.version) FROM products as p WHERE p.price = (SELECT MAX(price) FROM products)", nativeQuery = true)
     List<Long> findMaxPrice();
     // @Query(nativeQuery = true)
