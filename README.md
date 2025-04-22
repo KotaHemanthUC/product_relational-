@@ -122,6 +122,11 @@ Java(TM) SE Runtime Environment (build 21.0.7+8-LTS-245)
 Java HotSpot(TM) 64-Bit Server VM (build 21.0.7+8-LTS-245, mixed mode, sharing)
 ```
 
+<ol>
+<li>postgres port : localhost:5432/ecommerce</li>
+<li> application port : localhost:8080 </li>
+<ol>
+
 ### References
 - https://sqlfiddle.com/postgresql/online-compiler?id=83ae1851-401a-48cc-a4a3-dddcff2f844a
 - https://github.com/pfilaretov42/spring-data-jdbc-jsonb/blob/galaxy/src/main/kotlin/dev/pfilaretov42/spring/data/jdbc/jsonb/entity/FriendsEntity.kt
