@@ -42,7 +42,13 @@ INSERT INTO Products(ID, Product, Version, PYear, Price) VALUES (103, 'B', 2, 20
 Rest EndPoints:
 
 <ol>
-  <li>http://localhost:8080/api/products : returns all records of product value</li>
-  <li>http://localhost:8080/api/products/maxproductprice : gives latest version of maximum priced product</li>
-  <li>http://localhost:8080/api/products/yearmax : gives each years maximum price ID</li>
+  <li>http://localhost:8080/api/products : returns all records of product value.</li>
+  <li>http://localhost:8080/api/products/maxproductprice : gives latest version of maximum priced product.</li>
+  <li>http://localhost:8080/api/products/yearmax : gives each years maximum price ID.</li>
+  <li>http://localhost:8080/api/products : gives unique (product, price) entries with highest year.</li>
+
 </ol>
+
+Misc:
+
+This along with basic Curd Postgres operations are supported with ID based search.
