@@ -62,3 +62,14 @@ Then execute below command to get all tables in a database.
 ```shell
 SELECT tablename FROM pg_tables WHERE schemaname = 'public';
 ```
+
+```shell
+mvn --version
+```
+
+```plaintext
+Maven home: /usr/local/Cellar/maven/3.9.9/libexec
+Java version: 21.0.7, vendor: Oracle Corporation, runtime: /Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home
+Default locale: en_US, platform encoding: UTF-8
+OS name: "mac os x", version: "12.3.1", arch: "x86_64", family: "mac"
+```
