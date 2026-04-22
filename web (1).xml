@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app 
+   xmlns="http://java.sun.com/xml/ns/javaee" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+   metadata-complete="true"
+   version="2.5">
+	
+	<display-name>Device Management System</display-name>
+    
+    <filter>
+		<display-name>MDCFilter</display-name>
+		<filter-name>MDCFilter</filter-name>
+		<filter-class>simple.servlet.MDCFilter</filter-class>
+	</filter>
+	<filter>
+		<display-name>XSSFilter</display-name>
+		<filter-name>XSSFilter</filter-name>
+		<filter-class>simple.servlet.XSSFilter</filter-class>
+	</filter>
+	<filter>
+		<display-name>RecordRequestFilter</display-name>
+		<filter-name>RecordRequestFilter</filter-name>
+		<filter-class>com.usatech.dms.servlet.DMSRecordRequestFilter</filter-class>
+		<init-param>
+			<param-name>call-id</param-name>
+			<param-value>DEPRECATED</param-value>
+		</init-param>
+		<init-param>
+			<param-name>max-values</param-name>
+			<param-value>10000</param-value>
+		</init-param>
+		<init-param>
+            <param-name>masked-parameters</param-name>
+            <param-value>credential,password,confirm</param-value>
+        </init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>MDCFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>XSSFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>RecordRequestFilter</filter-name>
+		<url-pattern>*.i</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>CustomerGetKYCServlet</servlet-name>
+		<servlet-class>com.usatech.api.CustomerGetKYCServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CustomerGetKYCServlet</servlet-name>
+		<url-pattern>/customerGetKYC</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CustomerUpdateKYCServlet</servlet-name>
+		<servlet-class>com.usatech.api.CustomerUpdateKYCServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CustomerUpdateKYCServlet</servlet-name>
+		<url-pattern>/customerUpdateKYC</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CustomerGetBusinessCategoryServlet</servlet-name>
+		<servlet-class>com.usatech.api.CustomerGetBusinessCategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CustomerGetBusinessCategoryServlet</servlet-name>
+		<url-pattern>/customerGetBusinessCategory</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>CustomerUpdateBusinessCategoryServlet</servlet-name>
+		<servlet-class>com.usatech.api.CustomerUpdateBusinessCategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CustomerUpdateBusinessCategoryServlet</servlet-name>
+		<url-pattern>/customerUpdateBusinessCategory</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>DMSServlet</servlet-name>
+		<servlet-class>com.usatech.dms.servlet.DMSServlet</servlet-class>	
+		<init-param>
+  			<param-name>PARAMETER_ENCODING</param-name>
+  			<param-value>UTF-8</param-value>
+		</init-param>	
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DMSServlet</servlet-name>
+		<url-pattern>*.i</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>480</session-timeout>
+	</session-config>
+	<welcome-file-list>
+		<welcome-file>/home.i</welcome-file>
+	</welcome-file-list>
+	
+	<error-page>
+  		<error-code>404</error-code>
+  		<location>/home.i</location>
+	</error-page>
+	<error-page>
+	    <exception-type>java.lang.Exception</exception-type>
+	    <location>/error.i</location>
+    </error-page>
+    
+    <security-constraint>
+      <display-name>
+        Prevent direct access to JSP pages
+      </display-name>
+      <web-resource-collection>
+        <web-resource-name>JSP-Pages</web-resource-name>
+        <url-pattern>*.jsp</url-pattern> 
+	    <url-pattern>*.jspf</url-pattern>
+	    <url-pattern>*.jspx</url-pattern>
+	    <url-pattern>*.xsp</url-pattern>
+	    <url-pattern>*.JSP</url-pattern> 
+	    <url-pattern>*.JSPF</url-pattern>
+	    <url-pattern>*.JSPX</url-pattern>
+	    <url-pattern>*.XSP</url-pattern>
+      </web-resource-collection>
+      <auth-constraint>
+        <description>No roles, so no direct access</description>
+      </auth-constraint>
+    </security-constraint>    
+    
+   <!-- START OF BIRT SETTINGS -->
+   
+	<!-- Default locale setting.
+	-->
+	<context-param>
+		<param-name>BIRT_VIEWER_LOCALE</param-name>
+		<param-value>en-US</param-value>
+	</context-param>
+
+	<!-- 
+		Default timezone setting.
+		Examples: "Europe/Paris", "GMT+1".
+		Defaults to the container's timezone.		
+	 -->
+	<context-param>
+		<param-name>BIRT_VIEWER_TIMEZONE</param-name>
+		<param-value></param-value>
+	</context-param>
+	
+	<!--
+		Report resources directory for preview. Defaults to ${birt home}
+	-->
+	<context-param>
+		<param-name>BIRT_VIEWER_WORKING_FOLDER</param-name>
+		<param-value>/WEB-INF/birt/rptdesign</param-value>
+	</context-param>
+	
+	<!--
+		Temporary document files directory. Defaults to ${birt home}/documents
+	-->
+	<context-param>
+		<param-name>BIRT_VIEWER_DOCUMENT_FOLDER</param-name>
+		<param-value>/WEB-INF/birt/documents</param-value>
+	</context-param>
+
+	<!--
+		Flag whether the report resources can only be accessed under the
+		working folder. Defaults to true
+	-->
+	<context-param>
+		<param-name>WORKING_FOLDER_ACCESS_ONLY</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<!--
+		Settings for how to deal with the url report path. e.g. "http://host/repo/test.rptdesign". 
+		
+		Following values are supported:
+		
+		<all> 		- All paths.
+		<domain>	- Only the paths with host matches current domain. Note the comparison is literal, "127.0.0.1" and "localhost" are considered as different hosts.
+		<none> 		- URL paths are not supported.
+		
+		Defaults to "domain".
+	-->
+	<context-param>
+		<param-name>URL_REPORT_PATH_POLICY</param-name>
+		<param-value>none</param-value>
+	</context-param>
+
+	<!--
+		Temporary image/chart directory. Defaults to ${birt home}/report/images
+	-->
+	<context-param>
+		<param-name>BIRT_VIEWER_IMAGE_DIR</param-name>
+		<param-value>/WEB-INF/birt/report/images</param-value>
+	</context-param>
+
+	<!-- Engine log directory. Defaults to ${birt home}/logs -->
+	<context-param>
+		<param-name>BIRT_VIEWER_LOG_DIR</param-name>
+		<param-value>WEB-INF/birt/logs</param-value>
+	</context-param>
+
+	<!-- Report engine log level -->
+	<context-param>
+		<param-name>BIRT_VIEWER_LOG_LEVEL</param-name>
+		<param-value>SEVERE</param-value>
+	</context-param>
+
+	<!--
+		Directory where to store all the birt report script libraries (JARs).
+		Defaults to ${birt home}/scriptlib
+	-->
+	<context-param>
+		<param-name>BIRT_VIEWER_SCRIPTLIB_DIR</param-name>
+		<param-value>/WEB-INF/birt/scriptlib</param-value>
+	</context-param>
+	
+	<!-- Resource location directory. Defaults to ${birt home} -->
+	<context-param>
+		<param-name>BIRT_RESOURCE_PATH</param-name>
+		<param-value>/WEB-INF/birt</param-value>
+	</context-param>
+
+	<!-- Preview report rows limit. An empty value means no limit. -->
+	<context-param>
+		<param-name>BIRT_VIEWER_MAX_ROWS</param-name>
+		<param-value></param-value>
+	</context-param>
+
+	<!--
+		Max cube fetch levels limit for report preview (Only used when
+		previewing a report design file using the preview pattern)
+	-->
+	<context-param>
+		<param-name>BIRT_VIEWER_MAX_CUBE_ROWLEVELS</param-name>
+		<param-value></param-value>
+	</context-param>
+	<context-param>
+		<param-name>BIRT_VIEWER_MAX_CUBE_COLUMNLEVELS</param-name>
+		<param-value></param-value>
+	</context-param>
+
+	<!-- Memory size in MB for creating a cube. -->
+	<context-param>
+		<param-name>BIRT_VIEWER_CUBE_MEMORY_SIZE</param-name>
+		<param-value></param-value>
+	</context-param>
+
+	<!-- Defines the BIRT viewer configuration file -->
+	<context-param>
+		<param-name>BIRT_VIEWER_CONFIG_FILE</param-name>
+		<param-value>WEB-INF/viewer.properties</param-value>
+	</context-param>
+
+	<!--
+		Flag whether to allow server-side printing. Possible values are "ON"
+		and "OFF". Defaults to "ON".
+	-->
+	<context-param>
+		<param-name>BIRT_VIEWER_PRINT_SERVERSIDE</param-name>
+		<param-value>ON</param-value>
+	</context-param>
+
+	<!--
+		Flag whether to force browser-optimized HTML output. Defaults to true
+	-->
+	<context-param>
+		<param-name>HTML_ENABLE_AGENTSTYLE_ENGINE</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<!--
+		Filename generator class/factory to use for the exported reports.
+	-->
+	<context-param>
+		<param-name>BIRT_FILENAME_GENERATOR_CLASS</param-name>
+		<param-value>org.eclipse.birt.report.utility.filename.DefaultFilenameGenerator</param-value>
+	</context-param>
+
+	<!--
+		Viewer Filter used to set the request character encoding to UTF-8.
+	-->
+	<filter>
+    	<filter-name>ViewerFilter</filter-name>
+        <filter-class>org.eclipse.birt.report.filter.ViewerFilter</filter-class>
+	</filter>
+    <filter-mapping>
+        <filter-name>ViewerFilter</filter-name>
+        <servlet-name>ViewerServlet</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ViewerFilter</filter-name>
+        <servlet-name>EngineServlet</servlet-name>
+    </filter-mapping>
+    				
+	<!-- Viewer Servlet Context Listener -->
+	<listener>
+		<listener-class>org.eclipse.birt.report.listener.ViewerServletContextListener</listener-class>
+	</listener>
+
+	<!-- Viewer HttpSession Listener -->
+	<listener>
+		<listener-class>org.eclipse.birt.report.listener.ViewerHttpSessionListener</listener-class>
+	</listener>
+	
+	<!-- Viewer Servlet, Supports SOAP -->
+	<servlet>
+		<servlet-name>ViewerServlet</servlet-name>
+		<servlet-class>com.usatech.dms.servlet.BIRTViewerServlet</servlet-class>
+	</servlet>
+
+	<!-- Engine Servlet -->
+	<servlet>
+		<servlet-name>EngineServlet</servlet-name>
+		<servlet-class>org.eclipse.birt.report.servlet.BirtEngineServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ViewerServlet</servlet-name>
+		<url-pattern>/frameset</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>ViewerServlet</servlet-name>
+		<url-pattern>/run</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>EngineServlet</servlet-name>
+		<url-pattern>/preview</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>EngineServlet</servlet-name>
+		<url-pattern>/download</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>EngineServlet</servlet-name>
+		<url-pattern>/parameter</url-pattern>
+	</servlet-mapping>	
+
+	<servlet-mapping>
+		<servlet-name>EngineServlet</servlet-name>
+		<url-pattern>/document</url-pattern>
+	</servlet-mapping>	
+
+	<servlet-mapping>
+		<servlet-name>EngineServlet</servlet-name>
+		<url-pattern>/output</url-pattern>
+	</servlet-mapping>	
+	
+	<servlet-mapping>
+		<servlet-name>EngineServlet</servlet-name>
+		<url-pattern>/extract</url-pattern>
+	</servlet-mapping>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>/birt.tld</taglib-uri>
+			<taglib-location>/WEB-INF/birt/tlds/birt.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+   
+   <!--  END OF BIRT SETTINGS -->
+   
+   	<servlet>
+    	<servlet-name>APIJsonServlet</servlet-name>
+    	<servlet-class>com.usatech.api.APIJsonServlet</servlet-class>
+    	<init-param>
+	      <param-name>aliases</param-name>
+	      <param-value>false</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>acceptRanges</param-name>
+	      <param-value>false</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>dirAllowed</param-name>
+	      <param-value>false</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>welcomeServlets</param-name>
+	      <param-value>false</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>redirectWelcome</param-name>
+	      <param-value>false</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>maxCacheSize</param-name>
+	      <param-value>0</param-value>
+	    </init-param>
+  	</servlet>
+	
+	<servlet-mapping>
+    	<servlet-name>APIJsonServlet</servlet-name>
+    	<url-pattern>/json/api/*</url-pattern>
+  	</servlet-mapping>
+	
+</web-app>
